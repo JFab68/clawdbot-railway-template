@@ -66,6 +66,8 @@ RUN printf '%s\n' '#!/usr/bin/env bash' 'exec node /openclaw/dist/entry.js "$@"'
 
 COPY src ./src
 
+RUN curl -sL "https://github.com/steipete/gogcli/releases/download/v0.11.0/gogcli_0.11.0_linux_amd64.tar.gz" | tar xz -C /usr/local/bin/
+
 # The wrapper listens on this port.
 ENV OPENCLAW_PUBLIC_PORT=8080
 ENV PORT=8080
