@@ -74,7 +74,7 @@
           "alsoAllow": [
             "web_search",
             "web_fetch",
-            "gog",
+            "bash",
             "sessions_send",
             "cron"
           ]
@@ -95,7 +95,7 @@
         "tools": {
           "profile": "full",
           "alsoAllow": [
-            "gog",
+            "bash",
             "sessions_spawn",
             "cron"
           ]
