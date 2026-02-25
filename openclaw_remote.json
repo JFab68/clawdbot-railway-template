@@ -383,7 +383,8 @@
   "tools": {
     "exec": {
       "host": "gateway",
-      "ask": "off"
+      "ask": "off",
+      "security": "full"
     }
   }
 }
