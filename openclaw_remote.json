@@ -114,7 +114,9 @@
         "tools": {
           "profile": "full",
           "alsoAllow": [
-            "gog"
+            "gog",
+            "web_search",
+            "web_fetch"
           ]
         }
       },
