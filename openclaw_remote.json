@@ -27,16 +27,16 @@
       "model": {
         "primary": "openrouter/moonshotai/kimi-k2.5",
         "fallbacks": [
-          "openrouter/minimax/minimax-m2.5",
-          "openrouter/qwen/qwen3.5-397b-a17b"
+          "openrouter/qwen/qwen3.5-397b-a17b",
+          "openrouter/x-ai/grok-4.1-fast"
         ]
       },
       "models": {
         "openrouter/moonshotai/kimi-k2.5": {
           "alias": "Kimi K2.5"
         },
-        "openrouter/minimax/minimax-m2.5": {
-          "alias": "MiniMax M2.5"
+        "openrouter/qwen/qwen3.5-397b-a17b": {
+          "alias": "Qwen 3.5"
         },
         "openrouter/x-ai/grok-4.1-fast": {
           "alias": "Grok 4.1 Fast"
