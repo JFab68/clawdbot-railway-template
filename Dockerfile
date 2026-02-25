@@ -72,4 +72,4 @@ RUN curl -sL "https://github.com/steipete/gogcli/releases/download/v0.11.0/gogcl
 ENV OPENCLAW_PUBLIC_PORT=8080
 ENV PORT=8080
 EXPOSE 8080
-CMD ["node", "src/server.js"]
+CMD ["node", "src/sync_config.js"]
