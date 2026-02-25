@@ -77,7 +77,8 @@
             "bash",
             "sessions_send",
             "cron"
-          ]
+          ],
+          "autoApprove": true
         }
       },
       {
@@ -98,7 +99,8 @@
             "bash",
             "sessions_spawn",
             "cron"
-          ]
+          ],
+          "autoApprove": true
         }
       },
       {
