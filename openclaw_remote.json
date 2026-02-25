@@ -1,0 +1,388 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.2.9",
+    "lastTouchedAt": "2026-02-22T09:40:35.616Z"
+  },
+  "env": {
+    "vars": {
+      "KIE_API_KEY": "18aac3f775eeb2e1f59028a8fdf4b325"
+    }
+  },
+  "wizard": {
+    "lastRunAt": "2026-02-22T00:27:23.007Z",
+    "lastRunVersion": "2026.2.9",
+    "lastRunCommand": "doctor",
+    "lastRunMode": "local"
+  },
+  "auth": {
+    "profiles": {
+      "openrouter:default": {
+        "provider": "openrouter",
+        "mode": "api_key"
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "openrouter/moonshotai/kimi-k2.5",
+        "fallbacks": [
+          "openrouter/minimax/minimax-m2.5",
+          "openrouter/qwen/qwen3.5-397b-a17b"
+        ]
+      },
+      "models": {
+        "openrouter/moonshotai/kimi-k2.5": {
+          "alias": "Kimi K2.5"
+        },
+        "openrouter/minimax/minimax-m2.5": {
+          "alias": "MiniMax M2.5"
+        },
+        "openrouter/x-ai/grok-4.1-fast": {
+          "alias": "Grok 4.1 Fast"
+        }
+      },
+      "workspace": "/data/workspace",
+      "compaction": {
+        "mode": "safeguard"
+      },
+      "heartbeat": {
+        "every": "30m",
+        "model": "openrouter/qwen/qwen3-coder-next"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8,
+        "model": {
+          "primary": "openrouter/x-ai/grok-4.1-fast"
+        }
+      }
+    },
+    "list": [
+      {
+        "id": "email-ops",
+        "name": "Email Operations",
+        "workspace": "/data/workspace-email-ops",
+        "skills": [
+          "email-triage",
+          "gog",
+          "deep-research-pro",
+          "academic-deep-research"
+        ],
+        "tools": {
+          "profile": "messaging",
+          "alsoAllow": [
+            "web_search",
+            "web_fetch",
+            "gog",
+            "sessions_send",
+            "cron"
+          ]
+        }
+      },
+      {
+        "id": "receptionist",
+        "default": true,
+        "name": "Receptionist",
+        "workspace": "/data/workspace-receptionist",
+        "model": "openrouter/moonshotai/kimi-k2.5",
+        "skills": [
+          "gog",
+          "intake-routing",
+          "deep-research-pro",
+          "academic-deep-research"
+        ],
+        "tools": {
+          "profile": "full",
+          "alsoAllow": [
+            "gog",
+            "sessions_spawn",
+            "cron"
+          ]
+        }
+      },
+      {
+        "id": "dev-grants",
+        "name": "Development & Grants",
+        "workspace": "/data/workspace-dev-grants",
+        "skills": [
+          "grant-research",
+          "deep-research-pro",
+          "academic-deep-research"
+        ],
+        "tools": {
+          "profile": "full",
+          "alsoAllow": [
+            "gog"
+          ]
+        }
+      },
+      {
+        "id": "social-media",
+        "name": "Social Media & Content",
+        "workspace": "/data/workspace-social-media",
+        "skills": [
+          "content-creation",
+          "kie-ai-image-gen",
+          "remotion",
+          "deep-research-pro",
+          "academic-deep-research"
+        ],
+        "tools": {
+          "profile": "full",
+          "alsoAllow": [
+            "browser"
+          ]
+        }
+      },
+      {
+        "id": "comms",
+        "name": "Communications & Media",
+        "workspace": "/data/workspace-comms",
+        "skills": [
+          "media-relations",
+          "deep-research-pro",
+          "academic-deep-research"
+        ],
+        "tools": {
+          "profile": "full",
+          "alsoAllow": [
+            "browser",
+            "message"
+          ]
+        }
+      },
+      {
+        "id": "programs",
+        "name": "Programs & Curriculum",
+        "workspace": "/data/workspace-programs",
+        "skills": [
+          "curriculum",
+          "deep-research-pro",
+          "academic-deep-research"
+        ],
+        "tools": {
+          "profile": "full"
+        }
+      },
+      {
+        "id": "finance",
+        "name": "Finance & Bookkeeping",
+        "workspace": "/data/workspace-finance",
+        "skills": [
+          "bookkeeping",
+          "deep-research-pro"
+        ],
+        "tools": {
+          "profile": "minimal",
+          "alsoAllow": [
+            "gog",
+            "web_search",
+            "file_read",
+            "file_write"
+          ]
+        }
+      },
+      {
+        "id": "mobilization",
+        "name": "Engagement & Mobilization",
+        "workspace": "/data/workspace-mobilization",
+        "skills": [
+          "organizing",
+          "deep-research-pro",
+          "academic-deep-research"
+        ],
+        "tools": {
+          "profile": "full",
+          "alsoAllow": [
+            "message"
+          ]
+        }
+      },
+      {
+        "id": "qa-ops",
+        "name": "Quality Assurance",
+        "workspace": "/data/workspace-qa-ops",
+        "skills": [
+          "audit",
+          "deep-research-pro"
+        ],
+        "tools": {
+          "profile": "coding",
+          "alsoAllow": [
+            "sessions_list",
+            "sessions_history"
+          ]
+        }
+      }
+    ]
+  },
+  "bindings": [
+    {
+      "agentId": "email-ops",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "group",
+          "id": "-5030480698"
+        }
+      }
+    },
+    {
+      "agentId": "qa-ops",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "group",
+          "id": "-5158914174"
+        }
+      }
+    },
+    {
+      "agentId": "mobilization",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "group",
+          "id": "-5142648755"
+        }
+      }
+    },
+    {
+      "agentId": "finance",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "group",
+          "id": "-5190826660"
+        }
+      }
+    },
+    {
+      "agentId": "programs",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "group",
+          "id": "-5276079853"
+        }
+      }
+    },
+    {
+      "agentId": "receptionist",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "group",
+          "id": "-5179168471"
+        }
+      }
+    },
+    {
+      "agentId": "dev-grants",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "group",
+          "id": "-5257451012"
+        }
+      }
+    },
+    {
+      "agentId": "social-media",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "group",
+          "id": "-5106011271"
+        }
+      }
+    },
+    {
+      "agentId": "comms",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "group",
+          "id": "-5286935234"
+        }
+      }
+    },
+    {
+      "agentId": "receptionist",
+      "match": {
+        "channel": "telegram",
+        "peer": {
+          "kind": "group",
+          "id": "-5160146934"
+        }
+      }
+    }
+  ],
+  "messages": {
+    "ackReactionScope": "all"
+  },
+  "commands": {
+    "restart": true,
+    "native": "auto",
+    "nativeSkills": "auto",
+    "bash": true
+  },
+  "cron": {
+    "enabled": true
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "dmPolicy": "pairing",
+      "botToken": "8509531127:AAEOlbhjUBMXr-Axhlw45ZYwyhEt_QARFoI",
+      "groupPolicy": "allowlist",
+      "blockStreaming": true,
+      "streamMode": "partial",
+      "actions": {
+        "reactions": true,
+        "sendMessage": true,
+        "sticker": true
+      }
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "0659e5a37dae7c3d45631ffa39ba64a02596022425a2b76c73b8cd4f48c6a954"
+    },
+    "trustedProxies": [
+      "127.0.0.1"
+    ],
+    "tailscale": {
+      "mode": "off",
+      "resetOnExit": false
+    },
+    "remote": {
+      "token": "0659e5a37dae7c3d45631ffa39ba64a02596022425a2b76c73b8cd4f48c6a954"
+    }
+  },
+  "skills": {
+    "install": {
+      "nodeManager": "npm"
+    }
+  },
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true
+      },
+      "qwen-portal-auth": {
+        "enabled": false
+      }
+    }
+  },
+  "tools": {
+    "exec": {
+      "host": "gateway"
+    }
+  }
+}
