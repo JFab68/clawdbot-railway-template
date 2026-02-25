@@ -56,7 +56,10 @@
         "model": {
           "primary": "openrouter/x-ai/grok-4.1-fast"
         }
-      }
+      },
+      "skills": [
+        "openai-whisper"
+      ]
     },
     "list": [
       {
