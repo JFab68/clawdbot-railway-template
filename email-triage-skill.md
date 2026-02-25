@@ -7,26 +7,34 @@ description: Classify, prioritize, and draft responses for incoming emails. Trig
 
 Process incoming emails using priority classification and generate actionable outputs.
 
+## Account
+
+Always use `-a johnfabriciusiii@gmail.com` on all gog commands. Example:
+
+```bash
+gog gmail search "is:unread" -a johnfabriciusiii@gmail.com --max 20
+```
+
 ## ⚡ Token-Efficient Workflow (Chunking)
 
 > **CRITICAL**: Always use the two-step approach below. NEVER fetch full email bodies in bulk.
 
 ### Step 1: Fetch Snippets
 
-Use `gog gmail search` to get lightweight snippets first. **Always specify the target account using the `--account` flag:**
+Use `gog gmail search` to get lightweight snippets first:
 
 ```bash
-gog gmail search "is:unread" --account johnfabriciusiii@gmail.com --max 20
+gog gmail search "is:unread" -a johnfabriciusiii@gmail.com --max 20
 ```
 
 This returns **only** the message ID, sender, subject, and a short snippet for each email — NOT the full body. Use these snippets to classify priority.
 
 ### Step 2: Fetch Full Body (P1/P2 Only)
 
-For emails classified as P1 or P2 based on the snippet, fetch the full content. **Again, always specify the account:**
+For emails classified as P1 or P2 based on the snippet, fetch the full content:
 
 ```bash
-gog gmail get <messageId> --account <email>
+gog gmail get <messageId>
 ```
 
 **Do NOT fetch full bodies for P3 or P4 emails.** The snippet is sufficient for archiving or auto-responding.
@@ -56,10 +64,11 @@ gog gmail get <messageId> --account <email>
 
 ## Output Format
 
+```
 ## Email Triage — [DATE]
 
 ### P1 URGENT (X items)
-- **[Sender]** — [Subject] — [1-line summary] — Action: [recommendation]
+- **[Sender]** — [Subject] — [1-line summary] — ⚡ Action: [recommendation]
 
 ### P2 HIGH (X items)
 - **[Sender]** — [Subject] — Draft ready for review
@@ -69,34 +78,33 @@ gog gmail get <messageId> --account <email>
 
 ### P4 LOW (X items)
 - [count] auto-responded, [count] archived
+```
 
 ## Gmail Commands Reference
 
-> **IMPORTANT**: You must append `--account <email>` to **every** gog command so the system knows which inbox to read from or write to. Currently authenticated account: `johnfabriciusiii@gmail.com`. If the user asks to check a different email, try using that email in the `--account` flag.
-
 ```bash
 # Search (returns snippets only)
-gog gmail search "is:unread" --account <email>
-gog gmail search "from:arnoldventures.org" --account <email>
-gog gmail search "subject:SB 1507" --max 20 --account <email>
+gog gmail search "is:unread" -a johnfabriciusiii@gmail.com
+gog gmail search "from:arnoldventures.org" -a johnfabriciusiii@gmail.com
+gog gmail search "subject:SB 1507" -a johnfabriciusiii@gmail.com --max 20
 
 # Get full message
-gog gmail get <messageId> --account <email>
+gog gmail get <messageId> -a johnfabriciusiii@gmail.com
 
 # Send email
-gog gmail send "recipient@example.com" "Subject" "Body" --account <email>
+gog gmail send "recipient@example.com" "Subject" "Body" -a johnfabriciusiii@gmail.com
 
 # Create draft
-gog gmail draft "recipient@example.com" "Subject" "Body" --account <email>
+gog gmail draft "recipient@example.com" "Subject" "Body" -a johnfabriciusiii@gmail.com
 
 # Modify labels
-gog gmail modify <messageId> --add STARRED --remove UNREAD --account <email>
+gog gmail modify <messageId> -a johnfabriciusiii@gmail.com --add STARRED --remove UNREAD
 
 # List labels
-gog gmail labels --account <email>
+gog gmail labels -a johnfabriciusiii@gmail.com
 ```
 
 ## Routing Rules
-- Media/press → sessions_send to comms
-- Donations/grants → sessions_send to dev-grants
-- Invoices/financial → sessions_send to finance
+- Media/press → `sessions_send` to `comms`
+- Donations/grants → `sessions_send` to `dev-grants`
+- Invoices/financial → `sessions_send` to `finance`
