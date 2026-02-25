@@ -382,7 +382,8 @@
   },
   "tools": {
     "exec": {
-      "host": "gateway"
+      "host": "gateway",
+      "ask": "off"
     }
   }
 }
