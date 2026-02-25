@@ -97,6 +97,7 @@
           "alsoAllow": [
             "bash",
             "sessions_spawn",
+            "sessions_send",
             "cron"
           ]
         }
